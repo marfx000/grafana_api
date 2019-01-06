@@ -1,7 +1,7 @@
 from setuptools import setup
 
-with open('README.md') as file:
-    long_description = file.read()
+with open('README.md') as f:
+    long_description = f.read()
 
 setup(name='grafana_api',
       version='0.5.0',

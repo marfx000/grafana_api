@@ -48,6 +48,7 @@ class TokenAuth(requests.auth.AuthBase):
 class GrafanaAPI:
     def __init__(self, auth, host='localhost', port=None, url_path_prefix='', protocol='http', verify=True):
         self.auth = auth
+        self.token = None
         self.verify = verify
         self.url_host = host
         self.url_port = port
@@ -74,8 +75,10 @@ class GrafanaAPI:
         self.s = requests.Session()
         if not isinstance(self.auth, tuple):
             self.auth = TokenAuth(self.auth)
+            self.token = True
         else:
             self.auth = requests.auth.HTTPBasicAuth(*self.auth)
+            self.token = False
 
     def __getattr__(self, item):
         def __request_runnner(url, json=None, headers=None):

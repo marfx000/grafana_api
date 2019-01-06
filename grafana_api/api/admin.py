@@ -3,7 +3,7 @@ from .base import Base
 
 class Admin(Base):
     def __init__(self, api):
-        super().__init__(api)
+        super(Admin, self).__init__(api)
         self.api = api
 
     def settings(self):
@@ -72,6 +72,6 @@ class Admin(Base):
         :param pause:
         :return:
         """
-        change_user_permissions = self.path + '/pause-all-alerts'
+        change_user_permissions = '/admin/pause-all-alerts'
         r = self.api.POST(change_user_permissions, json={'paused': pause})
         return r
